@@ -97,6 +97,7 @@ function increment_counter_from_time(time_now: number): void {
 //Button function
 function upgrade_rps(button_id: number): void {
   the_important_number -= upgrades[button_id].cost;
+  upgrades[button_id].cost *= 1.15;
   passive_rps += upgrades[button_id].increase;
   upgrades[button_id].amount += 1;
   upgrade_buttons[button_id].innerHTML =
