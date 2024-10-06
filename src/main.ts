@@ -1,6 +1,6 @@
 import "./style.css";
 
-let rice_seen : number = 0;
+let rice_seen: number = 0;
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "Hello World!";
@@ -18,6 +18,6 @@ const button = document.createElement("button");
 button.innerHTML = "🎑";
 app.append(button);
 button.addEventListener("click", () => {
-    rice_seen += 1;
-    counter_div.innerHTML = `${rice_seen} rice seen.`;
-})
+  rice_seen += 1;
+  counter_div.innerHTML = `${rice_seen} rice seen.`;
+});
