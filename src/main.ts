@@ -15,6 +15,13 @@ const upgrades: Upgrade[] = [
     hov_flavor: "More seeds means more rice for the gods.",
   },
   {
+    name: "Expanded Fields",
+    cost: 50,
+    increase: 0.5,
+    amount: 0,
+    hov_flavor: "Bigger fields means more rice each season.",
+  },
+  {
     name: "Offering Plates",
     cost: 100,
     increase: 2,
@@ -23,10 +30,17 @@ const upgrades: Upgrade[] = [
   },
   {
     name: "Altars",
+    cost: 300,
+    increase: 8,
+    amount: 0,
+    hov_flavor: "Allow others to worship.",
+  },
+  {
+    name: "Missionaries",
     cost: 1000,
     increase: 50,
     amount: 0,
-    hov_flavor: "Allow others to worship.",
+    hov_flavor: "Morally dubious, but they bring in the rice.",
   },
 ];
 
