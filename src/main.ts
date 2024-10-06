@@ -80,7 +80,7 @@ requestAnimationFrame(update);
 //I made a game in one function hyuk--------------------------------
 
 //Class declarations ------------------------------------------
-
+//I already had a class
 interface Upgrade {
   name: string;
   cost: number;
