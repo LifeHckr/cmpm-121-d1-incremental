@@ -17,7 +17,11 @@ app.append(counter_div);
 const button = document.createElement("button");
 button.innerHTML = "🎑";
 app.append(button);
-button.addEventListener("click", () => {
+button.addEventListener("click", increment_counter);
+
+setInterval(increment_counter, 1000);
+
+function increment_counter():void {
   rice_seen += 1;
   counter_div.innerHTML = `${rice_seen} rice seen.`;
-});
+}
