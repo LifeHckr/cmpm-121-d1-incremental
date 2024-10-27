@@ -1,10 +1,18 @@
 import "./style.css";
 
 //Var declarations------------------------------------------------------------
-let the_important_number: number = 0;
-const big_num_flavor_text: string = "grains of rice offered.";
+let grains_offered: number = 0;
+const grains_flavor_text: string = "grains of rice offered.";
 let passive_rps: number = 0;
 const rps_flavor: string = "rice offered per second.";
+
+interface Upgrade {
+  name: string;
+  cost: number;
+  increase: number;
+  amount: number;
+  hov_flavor: string;
+}
 
 const upgrades: Upgrade[] = [
   {
@@ -50,15 +58,15 @@ let time_at_last_update: number = performance.now();
 //HTML Setup-------------------------------------------------------------------
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName: string = "Worship the Ancients";
-document.title = gameName;
+const game_name: string = "Worship the Ancients";
+document.title = game_name;
 
 const header: HTMLHeadingElement = document.createElement("h1");
-header.innerHTML = gameName;
+header.innerHTML = game_name;
 app.append(header);
 
 const counter_div: HTMLDivElement = document.createElement("div");
-counter_div.innerHTML = `${the_important_number.toFixed(2)} ${big_num_flavor_text}`;
+counter_div.innerHTML = `${grains_offered.toFixed(2)} ${grains_flavor_text}`;
 app.append(counter_div);
 
 const rps_div: HTMLDivElement = document.createElement("div");
@@ -93,16 +101,6 @@ for (let i: number = 0; i < upgrades.length; i++) {
 requestAnimationFrame(update);
 //I made a game in one function hyuk--------------------------------
 
-//Class declarations ------------------------------------------
-//I already had a class
-interface Upgrade {
-  name: string;
-  cost: number;
-  increase: number;
-  amount: number;
-  hov_flavor: string;
-}
-//End decl------------------------------------------------------
 
 //Function Declarations ----------------------------------------
 
@@ -110,7 +108,7 @@ interface Upgrade {
 function update(): void {
   const time_now: number = performance.now();
   for (let i: number = 0; i < upgrade_buttons.length; ++i) {
-    upgrade_buttons[i].disabled = !(the_important_number >= upgrades[i].cost);
+    upgrade_buttons[i].disabled = !(grains_offered >= upgrades[i].cost);
   }
   increment_counter_from_time(time_now);
   requestAnimationFrame(update);
@@ -118,24 +116,25 @@ function update(): void {
 
 //IDK in case I need to add more logic to click
 function increment_counter_from_click(): void {
-  the_important_number += 1;
-  counter_div.innerHTML = `${the_important_number.toFixed(2)} ${big_num_flavor_text}`;
+  grains_offered++;
+  counter_div.innerHTML = `${grains_offered.toFixed(2)} ${grains_flavor_text}`;
 }
 
 //Increment counter based on rps during update loop
 function increment_counter_from_time(time_now: number): void {
-  the_important_number +=
+  grains_offered +=
     ((time_now - time_at_last_update) / 1000) * passive_rps;
-  counter_div.innerHTML = `${the_important_number.toFixed(2)} ${big_num_flavor_text}`;
+  counter_div.innerHTML = `${grains_offered.toFixed(2)} ${grains_flavor_text}`;
   time_at_last_update = time_now;
 }
 
 //Button function
+const cost_modifier : number = 1.15;
 function upgrade_rps(button_id: number): void {
-  the_important_number -= upgrades[button_id].cost;
-  upgrades[button_id].cost *= 1.15;
+  grains_offered -= upgrades[button_id].cost;
+  upgrades[button_id].cost *= cost_modifier;
   passive_rps += upgrades[button_id].increase;
-  upgrades[button_id].amount += 1;
+  upgrades[button_id].amount++;
   upgrade_buttons[button_id].innerHTML =
     `${upgrades[button_id].name}<br>+${upgrades[button_id].increase} rps | Cost: ${upgrades[button_id].cost.toFixed(2)}<br>Owned: ${upgrades[button_id].amount}</br>`;
 
