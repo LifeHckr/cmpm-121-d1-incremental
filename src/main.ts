@@ -65,19 +65,25 @@ const header: HTMLHeadingElement = document.createElement("h1");
 header.innerHTML = game_name;
 app.append(header);
 
+const button: HTMLButtonElement = document.createElement("button");
+button.innerHTML = `🎑<br>Leave Offering`;
+button.id = "main_button";
+app.append(button);
+button.addEventListener("click", (event) => {
+  animateOnClick(event.clientX, event.clientY);
+  increment_counter_from_click();
+});
+
 const counter_div: HTMLDivElement = document.createElement("div");
+counter_div.id = "data_div";
 counter_div.innerHTML = `${grains_offered.toFixed(2)} ${grains_flavor_text}`;
 app.append(counter_div);
 
 const rps_div: HTMLDivElement = document.createElement("div");
+rps_div.id = "data_div";
 rps_div.innerHTML = `${passive_rps.toFixed(2)} ${rps_flavor}`;
 rps_div.title = "Total rps (rice per second) from all upgrades.";
 app.append(rps_div);
-
-const button: HTMLButtonElement = document.createElement("button");
-button.innerHTML = `🎑<br>Leave Offering`;
-app.append(button);
-button.addEventListener("click", increment_counter_from_click);
 
 const upgrade_div: HTMLDivElement = document.createElement("div");
 app.append(upgrade_div);
@@ -124,6 +130,26 @@ function increment_counter_from_time(time_now: number): void {
   grains_offered += ((time_now - time_at_last_update) / 1000) * passive_rps;
   counter_div.innerHTML = `${grains_offered.toFixed(2)} ${grains_flavor_text}`;
   time_at_last_update = time_now;
+}
+
+//Credit to Nick Corfmat
+function animateOnClick(x: number, y: number) {
+  const plus_one = document.createElement("div");
+  plus_one.innerHTML = "+1";
+  plus_one.classList.add("anim");
+  document.body.appendChild(plus_one);
+
+  plus_one.style.left = `${x-7}px`;
+  plus_one.style.top = `${y+2}px`;
+
+  setTimeout(() => {
+    plus_one.style.transform = "translateY(-200px)";
+    plus_one.style.opacity = "0";
+  }, 0);
+
+  setTimeout(() => {
+    plus_one.remove();
+  }, 500);
 }
 
 //Button function
